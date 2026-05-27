@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   ArrowUpRight,
   Sparkle,
@@ -11,6 +12,7 @@ import {
   Box,
   Wand2,
 } from 'lucide-react'
+import PrismaLanding from './components/PrismaLanding'
 
 // Custom SVGs for icons not present in lucide-react version
 const Figma = (props: React.SVGProps<SVGSVGElement>) => (
@@ -55,8 +57,13 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; strokeWi
 }
 
 function App() {
+  const [showPrisma, setShowPrisma] = useState(false)
   const row1 = ['Figma', 'Framer', 'Palette', 'PenTool', 'Layers', 'Type', 'Aperture', 'Chrome']
   const row2 = ['Camera', 'Brush', 'Box', 'Wand2', 'Figma', 'Framer', 'Type', 'Layers']
+
+  if (showPrisma) {
+    return <PrismaLanding onBack={() => setShowPrisma(false)} />
+  }
 
   return (
     <div className="min-h-screen lg:h-screen w-full bg-[#0a0a0a] text-white font-sans antialiased flex flex-col justify-between px-4 sm:px-6 md:px-10 lg:px-14 py-6 sm:py-8 md:py-10">
@@ -92,7 +99,10 @@ function App() {
               className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105"
             />
             {/* Subtle Gradient Overlays */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/90"></div>
+            <div
+              onClick={() => setShowPrisma(true)}
+              className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/90 cursor-pointer"
+            ></div>
           </div>
 
           {/* Top Section */}
